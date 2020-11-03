@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -10,10 +10,10 @@ export default function Home() {
 
       <main>
         <h1>Hello world</h1>
-        <Link href='posts/first-post'>
+        <Link href="posts/first-post">
           <a>Clique</a>
         </Link>
       </main>
     </div>
-  )
+  );
 }
