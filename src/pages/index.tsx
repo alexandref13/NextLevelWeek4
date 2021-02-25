@@ -1,22 +1,27 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
+import { CompleteChallenges } from '../components/CompletedChallenges'
+import { Countdown } from '../components/Countdown'
+import { ExperienceBar } from '../components/ExperienceBar'
+import { Profile } from '../components/Profile'
 
-const Home: React.FC = () => {
+import styles from '../styles/pages/Home.module.css'
+
+export default function Home() {
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Inicio | Move.it</title>
       </Head>
-
-      <main>
-        <h1>Hello world</h1>
-        <Link href="posts/first-post">
-          <a>Clique</a>
-        </Link>
-      </main>
+      <ExperienceBar />
+      <section>
+        <div>
+          <Profile />
+          <CompleteChallenges />
+          <Countdown />
+        </div>
+        <div></div>
+      </section>
     </div>
   )
 }
-
-export default Home
