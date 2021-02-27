@@ -1,5 +1,7 @@
 import { GetServerSideProps } from 'next'
 
+import * as cookie from 'cookie'
+
 import { Countdown } from '../components/Countdown'
 import { ChallengeBox } from '../components/ChallengeBox'
 import { ExperienceBar } from '../components/ExperienceBar'
@@ -52,9 +54,10 @@ export default function Home(props: HomeProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { level, currentExperience, challengesCompleted } = cookie.parse(
+    ctx.req.headers.cookie
+  )
   return {
     props: {
       level: Number(level),
