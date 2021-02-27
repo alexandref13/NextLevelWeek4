@@ -1,19 +1,18 @@
-import React from 'react'
 import { GetServerSideProps } from 'next'
-import Head from 'next/head'
 
-import * as cookie from 'cookie'
-
-import { CompleteChallenges } from '../components/CompletedChallenges'
 import { Countdown } from '../components/Countdown'
+import { ChallengeBox } from '../components/ChallengeBox'
 import { ExperienceBar } from '../components/ExperienceBar'
 import { Profile } from '../components/Profile'
 
-import styles from '../styles/pages/Home.module.css'
-import { ChallengeBox } from '../components/ChallengeBox'
-import { ChallengesProvider } from '../contexts/ChallengesContext'
 import { CountdownProvider } from '../contexts/CountdownContext'
+import { ChallengesProvider } from '../contexts/ChallengesContext'
 
+import Head from 'next/head'
+
+import styles from '../styles/pages/Home.module.css'
+import React from 'react'
+import { CompleteChallenges } from '../components/CompletedChallenges'
 interface HomeProps {
   level: number
   currentExperience: number
@@ -31,11 +30,13 @@ export default function Home(props: HomeProps) {
     >
       <div className={styles.container}>
         <Head>
-          <title>Inicio | Move.it </title>
+          <title>Início | move.it</title>
         </Head>
+
         <ExperienceBar />
-        <section>
-          <CountdownProvider>
+
+        <CountdownProvider>
+          <section>
             <div>
               <Profile />
               <CompleteChallenges />
@@ -44,17 +45,15 @@ export default function Home(props: HomeProps) {
             <div>
               <ChallengeBox />
             </div>
-          </CountdownProvider>
-        </section>
+          </section>
+        </CountdownProvider>
       </div>
     </ChallengesProvider>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { level, currentExperience, challengesCompleted } = cookie.parse(
-    ctx.req.headers.cookie
-  )
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
 
   return {
     props: {
