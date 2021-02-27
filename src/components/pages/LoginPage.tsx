@@ -7,6 +7,11 @@ import { ProfileContext } from '../../contexts/ProfileContext'
 import styles from '../../styles/pages/Login.module.css'
 export default function Login() {
   const { getUser, username, setUsername } = useContext(ProfileContext)
+
+  function setUser() {
+    setUsername(username)
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -31,7 +36,7 @@ export default function Login() {
               value={username}
             />
             <Link href="/dashboard">
-              <button type="button" onClick={getUser}>
+              <button type="button" onClick={setUser}>
                 <img src="/icons/right-arrow.svg" alt="Flecha para direita" />
               </button>
             </Link>

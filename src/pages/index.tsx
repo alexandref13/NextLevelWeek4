@@ -3,8 +3,6 @@ import { ProfileProvider } from '../contexts/ProfileContext'
 
 export default function Home() {
   return (
-    <ProfileProvider>
       <Login />
-    </ProfileProvider>
   )
 }
