@@ -65,7 +65,9 @@ export function ChallengesProvider({
   }, [level, currentExperience, challengesCompleted])
 
   useEffect(() => {
-    Notification.requestPermission()
+    if (screen.width >= 750) {
+      Notification.requestPermission()
+    }
   }, [])
 
   function levelUp() {
@@ -83,9 +85,9 @@ export function ChallengesProvider({
 
     setActiveChallenges(challenge)
 
-    new Audio('/notification.mp3').play()
+    if (Notification.permission === 'granted' && screen.width >= 750) {
+      new Audio('/notification.mp3').play()
 
-    if (Notification.permission === 'granted') {
       new Notification('Novo desafio 🎉', {
         body: `Valendo ${challenge.amount} xp`
       })
