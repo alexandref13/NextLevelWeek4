@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
-import {
+import { useRouter } from 'next/router'
+import React, {
   createContext,
   Dispatch,
   ReactNode,
@@ -7,6 +8,8 @@ import {
   useEffect,
   useState
 } from 'react'
+import { IsNotLogged } from '../components/isNotLogged'
+
 import { api } from '../service/api'
 
 export const ProfileContext = createContext({} as ProfileContextData)
@@ -21,9 +24,11 @@ interface ProfileProviderProps {
 interface ProfileContextData {
   user: UserProps
   username: string
+  isLogged: boolean
   setUsername: Dispatch<SetStateAction<string>>
   setUser: Dispatch<SetStateAction<UserProps>>
   getUser: () => void
+  closeIsLoggedModal: () => void
 }
 
 interface UserProps {
@@ -33,24 +38,58 @@ interface UserProps {
 }
 
 export function ProfileProvider({ children, ...rest }: ProfileProviderProps) {
-  const [user, setUser] = useState(rest ?? ({} as UserProps))
-  const [username, setUsername] = useState(rest.login === "undefined" ? '' : rest.login)
+  const route = useRouter()
 
-  useEffect(() => {
-    Cookies.set('login', user.login)
-    Cookies.set('avatar_url', user.avatar_url)
-    Cookies.set('name', user.name)
-  }, [user])
+  const [user, setUser] = useState(rest ?? ({} as UserProps))
+  const [username, setUsername] = useState(
+    rest.login === 'undefined' ? '' : rest.login
+  )
+  const [isLogged, setIsLogged] = useState(true)
 
   async function getUser() {
-    const response = await api.get(`/users/${username}`)
-    setUser(response.data)
+    try {
+      const response = await api.get(`/users/${username}`)
+      setUser(response.data)
+      setIsLogged(true)
+    } catch (err) {
+      route.back()
+      setIsLogged(false)
+    }
   }
+
+  function removeCookies() {
+    Cookies.remove('login')
+    Cookies.remove('name')
+    Cookies.remove('avatar_url')
+  }
+
+  function closeIsLoggedModal() {
+    setIsLogged(true)
+  }
+
+  useEffect(() => {
+    const login = Cookies.get('login')
+    if (!login || login === 'undefined') {
+      removeCookies()
+    } else {
+      route.push('/dashboard')
+    }
+  }, [])
+
   return (
     <ProfileContext.Provider
-      value={{ user, username, setUsername, setUser, getUser }}
+      value={{
+        user,
+        username,
+        isLogged,
+        setUsername,
+        setUser,
+        getUser,
+        closeIsLoggedModal
+      }}
     >
       {children}
+      {!isLogged && <IsNotLogged />}
     </ProfileContext.Provider>
   )
 }

@@ -41,7 +41,7 @@ export function ChallengesProvider({
   children,
   ...rest
 }: ChallengeProviderProps) {
-  const { getUser } = useContext(ProfileContext)
+  const { getUser, user } = useContext(ProfileContext)
 
   const [level, setLevel] = useState(rest.level ?? 1)
   const [currentExperience, setCurrentExperience] = useState(
@@ -54,6 +54,13 @@ export function ChallengesProvider({
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
+
+  useEffect(() => {
+    Cookies.set('login', user.login)
+    Cookies.set('avatar_url', user.avatar_url)
+    Cookies.set('name', user.name)
+  }, [user])
+
   useEffect(() => {
     getUser()
   }, [])

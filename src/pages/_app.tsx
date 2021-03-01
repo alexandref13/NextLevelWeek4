@@ -2,6 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import { ProfileProvider } from '../contexts/ProfileContext'
 import '../styles/global.css'
+
 function MyApp({ Component, pageProps }) {
   return (
     <ProfileProvider
