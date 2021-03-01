@@ -1,7 +1,14 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 import Cookies from 'js-cookie'
 import challenges from '../../challenges.json'
 import { LevelUpModal } from '../components/LevelUpModal'
+import { ProfileContext } from './ProfileContext'
 
 interface Challenge {
   type: 'body' | 'eye'
@@ -34,6 +41,8 @@ export function ChallengesProvider({
   children,
   ...rest
 }: ChallengeProviderProps) {
+  const { getUser } = useContext(ProfileContext)
+
   const [level, setLevel] = useState(rest.level ?? 1)
   const [currentExperience, setCurrentExperience] = useState(
     rest.currentExperience ?? 0
@@ -45,12 +54,9 @@ export function ChallengesProvider({
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
 
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2)
-
-  // useEffect(() => {
-  //   setLevel(Number(Cookies.get('level')))
-  //   setCurrentExperience(Number(Cookies.get('currentExperience')))
-  //   setChallengesCompleted(Number(Cookies.get('challengesCompleted')))
-  // }, [])
+  useEffect(() => {
+    getUser()
+  }, [])
 
   useEffect(() => {
     Cookies.set('level', level.toString())

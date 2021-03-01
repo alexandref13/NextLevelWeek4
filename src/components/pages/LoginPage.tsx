@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { ProfileContext } from '../../contexts/ProfileContext'
 
 import styles from '../../styles/pages/Login.module.css'
 export default function Login() {
-  const { getUser, username, setUsername } = useContext(ProfileContext)
+  const { username, setUsername } = useContext(ProfileContext)
 
   function setUser() {
     setUsername(username)

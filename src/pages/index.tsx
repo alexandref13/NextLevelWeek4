@@ -1,8 +1,10 @@
+import { GetServerSideProps } from 'next'
 import Login from '../components/pages/LoginPage'
-import { ProfileProvider } from '../contexts/ProfileContext'
 
-export default function Home() {
-  return (
-      <Login />
-  )
+export default function Home(props) {
+  return <Login />
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { props: {} }
 }

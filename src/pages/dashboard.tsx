@@ -11,9 +11,8 @@ import { ChallengesProvider } from '../contexts/ChallengesContext'
 import Head from 'next/head'
 
 import styles from '../styles/pages/Dashboard.module.css'
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { CompleteChallenges } from '../components/CompletedChallenges'
-import { ProfileContext, ProfileProvider } from '../contexts/ProfileContext'
 
 interface DashboardProps {
   level: number
@@ -22,12 +21,6 @@ interface DashboardProps {
 }
 
 export default function Dashboard(props: DashboardProps) {
-  const { getUser } = useContext(ProfileContext)
-
-  useEffect(() => {
-    getUser()
-  }, [])
-
   return (
     <ChallengesProvider
       level={props.level}
@@ -44,7 +37,7 @@ export default function Dashboard(props: DashboardProps) {
         <CountdownProvider>
           <section>
             <div>
-                <Profile />
+              <Profile />
               <CompleteChallenges />
               <Countdown />
             </div>

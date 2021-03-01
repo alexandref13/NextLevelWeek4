@@ -1,12 +1,45 @@
 .container{
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6.25rem;
   align-content: center;
-  background: var(--blue)
+  background-color: var(--blue);
+}
+
+@media (max-width: 1240px){
+  .container{
+    max-width:1240px;
+    width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    background-image: url('/Simbolo.svg') no-repeat center;
+  } 
+  .symbol img {
+    display: none
+  }
+  .wellcome main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    z-index: 5;
+    overflow: hidden;
+  }
+
+  .wellcome .inputContainer input{
+    width: 280px;
+  }
+
+  .wellcome .inputContainer input::placeholder{
+    font-size: 1.2rem;
+  }
 }
 
 .symbol{
