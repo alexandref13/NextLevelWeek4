@@ -8,7 +8,7 @@ import React, {
   useEffect,
   useState
 } from 'react'
-import { IsNotLogged } from '../components/isNotLogged'
+import { IsNotLogged } from '../components/IsNotLogged'
 
 import { api } from '../service/api'
 
