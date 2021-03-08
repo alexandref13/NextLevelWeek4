@@ -1,10 +1,17 @@
 import Head from 'next/head'
 import Link from 'next/link'
-
 import { useContext } from 'react'
+
 import { ProfileContext } from '../../contexts/ProfileContext'
 
-import styles from '../../styles/pages/Login.module.css'
+import {
+  Container,
+  Symbol,
+  Welcome,
+  GithubContainer,
+  InputContainer
+} from '../../styles/pages/Login'
+
 export default function Login() {
   const { username, setUsername } = useContext(ProfileContext)
 
@@ -13,22 +20,22 @@ export default function Login() {
   }
 
   return (
-    <div className={styles.container}>
+    <Container>
       <Head>
         <title>Inicio | move.it</title>
       </Head>
-      <div className={styles.symbol}>
+      <Symbol>
         <img src="/Simbolo.svg" alt="" />
-      </div>
-      <div className={styles.wellcome}>
+      </Symbol>
+      <Welcome>
         <main>
           <img src="/logoMoveit.svg" alt="Logo" />
           <strong>Bem-vindo</strong>
-          <div className={styles.githubContainer}>
+          <GithubContainer>
             <img src="/icons/github.svg" alt="Github" />
             <p>Faça login com seu Github para começar</p>
-          </div>
-          <div className={styles.inputContainer}>
+          </GithubContainer>
+          <InputContainer>
             <input
               type="text"
               placeholder="Digite seu username"
@@ -40,9 +47,9 @@ export default function Login() {
                 <img src="/icons/right-arrow.svg" alt="Flecha para direita" />
               </button>
             </Link>
-          </div>
+          </InputContainer>
         </main>
-      </div>
-    </div>
+      </Welcome>
+    </Container>
   )
 }

@@ -1,21 +1,10 @@
+import { createGlobalStyle } from 'styled-components'
+
+export const GlobalStyle = createGlobalStyle`
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
-
-:root{
-  --white:#fff;
-  --background: #f2f3f5;
-  --gray-line: #DCDDE0;
-  --text: #666666;
-  --text-highlight: #B2B9FF;
-  --title: #2E384D;
-  --red: #E83F5B;
-  --green: #4CD62B;
-  --blue: #5965E0;
-  --blue-dark: #4953B8;
-  --blue-twitter: #2AA9E0;
 }
 
 @media(max-width: 1080px){
@@ -31,8 +20,8 @@
 }
 
 body{
-  background: var(--background);
-  color: var(--text);
+  background: ${props => props.theme.color.background};
+  color: ${props => props.theme.color.text}
 }
 
 body, button, input, textarea{
@@ -47,5 +36,4 @@ a{
   text-decoration: none;
   color: inherit;
 }
-
-
+`
