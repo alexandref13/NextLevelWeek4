@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import Head from 'next/head'
 
 import { Countdown } from '../components/Countdown'
 import { ChallengeBox } from '../components/ChallengeBox'
@@ -7,12 +8,9 @@ import { Profile } from '../components/Profile'
 
 import { CountdownProvider } from '../contexts/CountdownContext'
 import { ChallengesProvider } from '../contexts/ChallengesContext'
-
-import Head from 'next/head'
-
-import styles from '../styles/pages/Dashboard.module.css'
-import React from 'react'
 import { CompleteChallenges } from '../components/CompletedChallenges'
+
+import { Container } from '../styles/pages/Dashboard'
 
 interface DashboardProps {
   level: number
@@ -27,7 +25,7 @@ export default function Dashboard(props: DashboardProps) {
       currentExperience={props.currentExperience}
       challengesCompleted={props.challengesCompleted}
     >
-      <div className={styles.container}>
+      <Container>
         <Head>
           <title>Dashboard | move.it</title>
         </Head>
@@ -48,7 +46,7 @@ export default function Dashboard(props: DashboardProps) {
             </section>
           </CountdownProvider>
         </div>
-      </div>
+      </Container>
     </ChallengesProvider>
   )
 }

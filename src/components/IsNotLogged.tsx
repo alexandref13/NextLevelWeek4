@@ -1,18 +1,18 @@
 import { useContext } from 'react'
 import { ProfileContext } from '../contexts/ProfileContext'
-import styles from '../styles/components/LevelUpModal.module.css'
+import { Overlay, Container } from '../styles/components/LevelUpModal'
 
 export function IsNotLogged() {
   const { closeIsLoggedModal } = useContext(ProfileContext)
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.container}>
+    <Overlay>
+      <Container>
         <p>Por favor, digite um username válido</p>
         <button type="button" onClick={closeIsLoggedModal}>
           <img src="/icons/close.svg" alt="Fechar Modal" />
         </button>
-      </div>
-    </div>
+      </Container>
+    </Overlay>
   )
 }
